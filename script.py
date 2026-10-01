@@ -5,14 +5,13 @@ import pandas as pd
 from decouple import config
 from datetime import datetime
 
-OWM_KEY = config("OPENWEATHER_KEY")
 LAT = config("LAT", cast=float)
 LON = config("LON", cast=float)
 RADIUS = config("RADIUS", cast=int)
 START_DATE = datetime.strptime(config("START_DATE"), "%Y-%m-%d")
 END_DATE = datetime.strptime(config("END_DATE"), "%Y-%m-%d")
 VARIABLES = ["tavg", "tmin", "tmax", "prcp", "wspd", "pres", "tsun"]
-VARIABLE = VARIABLES[3]
+VARIABLE = VARIABLES[0]
 
 # Acceso a las estaciones meteorológicas
 station = Stations()
@@ -23,7 +22,7 @@ station = station.fetch()
 station = pd.DataFrame(station)
 # Convertiendo a GeoDataFrame
 station = GeoDataFrame(
-    station, geometry=points_from_xy(station["longitude"], station["latitude"])
+    station, geometry=points_from_xy(station["longitude"], station["latitude"], crs="EPSG:4326")
 )
 
 weather_data = pd.DataFrame()
@@ -39,7 +38,7 @@ for i in station.index:
         data = data.normalize()
     data = data.fetch()
     data = data.reset_index()
-    data.time = data.time.dt.strftime("%b")
+    data.time = data.time.dt.strftime("%Y-%m")
     data = data.set_index("time")
     data = pd.DataFrame(data)[VARIABLE].to_frame().T
     data["id"] = i

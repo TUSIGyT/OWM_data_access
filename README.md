@@ -1,9 +1,8 @@
 # Open Weather Map API
 
-Repositório con script para acceder a los datos meteorológicos usando [Open Weather Map API](https://openweathermap.org/api), a partir de del modulo python [meteostat](https://dev.meteostat.net/python/).
+Repositório con script para acceder a datos meteorológicos mensuales a partir del modulo python [meteostat](https://dev.meteostat.net/python/). No es necesario tener cuenta ni API Key de Open Weather Map.
 
 ## Usando
-Antes de usar el script es importante tener creado un usuario en [Open Weather Map](https://home.openweathermap.org/users/sign_up) y obtener una API Key, a ser [informada como variable de ambiente](#Definiendo-variables-de-ambiente).
 
 ### Creando ambiente virtual
 
@@ -21,13 +20,13 @@ Para acceder a los datos meteorológicos es necesario definir las siguientes var
 * Fecha de inicio y fin de la búsqueda; 
 
 ```bash
-touch .env
-echo OPENWEATHERMAP_API_KEY="your_api_key" > .env
-echo LAT=-26.829269 > .env
-echo LON=-54.848013 > .env
-echo RADIUS=200000 > .env
-echo START_DATE="2021-01-01" > .env
-echo END_DATE="2021-12-31" > .env
+cat > .env <<EOF
+LAT=-26.829269
+LON=-54.848013
+RADIUS=200000
+START_DATE=2021-01-01
+END_DATE=2021-12-31
+EOF
 ```
 
 ### Ejecutando
@@ -45,4 +44,4 @@ python script.py
 ```
 
 ## Resultado
-Un GPKG será creado en la raíz del proyecto con los datos meteorológicos de las estaciones encontradas en el radio de búsqueda.
+Un GPKG será creado en la raíz del proyecto con los datos meteorológicos de las estaciones encontradas en el radio de búsqueda. Cada mes del período es una columna nombrada `AAAA-MM` (por ejemplo, `2021-01`).
