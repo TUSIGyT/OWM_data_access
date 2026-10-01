@@ -45,3 +45,14 @@ python script.py
 
 ## Resultado
 Un GPKG será creado en la raíz del proyecto con los datos meteorológicos de las estaciones encontradas en el radio de búsqueda. Cada mes del período es una columna nombrada `AAAA-MM` (por ejemplo, `2021-01`).
+
+## América del Sur
+El script [south_america.py](south_america.py) descarga la temperatura media mensual (`tavg`) de 2021 para todas las estaciones de Meteostat en América del Sur. No usa el `.env`: los países, el período y la variable están definidos al inicio del script.
+
+```bash
+python south_america.py
+```
+
+Genera `south_america.gpkg` (capa `tavg_2021`) con unas 420 estaciones y una columna por mes (`2021-01` … `2021-12`). Los meses sin dato quedan vacíos. La descarga tarda unos minutos.
+
+Se usa 2021 porque Meteostat no tiene datos mensuales de América del Sur posteriores a 2022, y 2021 es el año con más estaciones. Incluye estaciones insulares, como Isla de Pascua (Chile) y Fernando de Noronha (Brasil).
