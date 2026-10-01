@@ -1,6 +1,6 @@
-# Open Weather Map API
+# Meteostat API
 
-Repositório con script para acceder a datos meteorológicos mensuales a partir del modulo python [meteostat](https://dev.meteostat.net/python/). No es necesario tener cuenta ni API Key de Open Weather Map.
+Repositório con script para acceder a datos meteorológicos mensuales a partir del modulo python [meteostat](https://dev.meteostat.net/python/).
 
 ## Usando
 
